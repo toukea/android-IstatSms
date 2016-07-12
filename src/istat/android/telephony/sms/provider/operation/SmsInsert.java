@@ -1,0 +1,96 @@
+package istat.android.telephony.sms.provider.operation;
+
+import istat.android.telephony.sms.Sms;
+import android.content.Context;
+/*
+ * Copyright (C) 2014 Istat Dev.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * 
+ * @author Toukea Tatsi (Istat)
+ *
+ */
+public final class SmsInsert  {
+	 private Sms sms=new Sms();
+	 Context context;
+	 SmsInsert(Context context) {
+		this.context=context;
+		// TODO Auto-generated constructor stub
+	}
+	public SmsInsert setSms(Sms smsLike){
+		sms=smsLike;
+		return this;
+	}
+	public int execute(){
+		 return SmsQuery.insert(context,sms);
+	}
+	public SmsInsert set_id(String _id) {
+		sms._id = _id;
+		return this;
+	}
+	public SmsInsert setAddress(String address) {
+		sms.address = address;
+		return this;
+	}
+	public SmsInsert setBody(String body) {
+		sms.body = body;
+		return this;
+	}
+	public SmsInsert setDate(String date) {
+		sms.date = date;
+		return this;
+	}
+	public SmsInsert setLocked(String locked) {
+		sms.locked = locked;
+		return this;
+	}
+	public SmsInsert setPerson(String person) {
+		sms.person = person;
+		return this;
+	}
+	public SmsInsert setProtocol(String protocol) {
+		sms.protocol = protocol;
+		return this;
+	}
+	public SmsInsert setRead(String read) {
+		sms.read = read;
+		return this;
+	}
+	public SmsInsert setReply_path_present(String reply_path_present) {
+		sms.reply_path_present = reply_path_present;
+		return this;
+	}
+	public SmsInsert setService_center(String service_center) {
+		sms.service_center = service_center;
+		return this;
+	}
+	public SmsInsert setStatus(String status) {
+		sms.status = status;
+		return this;
+	}
+	public SmsInsert setSubject(String subject) {
+		sms.subject = subject;
+		return this;
+	}
+	public SmsInsert setThread_id(String thread_id) {
+		sms.thread_id = thread_id;
+		return this;
+	}
+	public SmsInsert setType(String type) {
+		sms.type = type;
+		return this;
+	}
+	
+}
