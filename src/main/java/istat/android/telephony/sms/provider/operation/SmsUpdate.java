@@ -24,7 +24,7 @@ import android.content.Context;
  * @author Toukea Tatsi (Istat)
  *
  */
-@Deprecated
+//@Deprecated
  public final  class SmsUpdate extends SmsClause<SmsUpdate> {
 	 private Sms sms=new Sms();
 	 SmsUpdate(Context context) {

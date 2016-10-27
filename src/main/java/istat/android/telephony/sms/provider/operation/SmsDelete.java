@@ -22,12 +22,11 @@ import android.content.Context;
  * @author Toukea Tatsi (Istat)
  *
  */
-@Deprecated
+//@Deprecated
 public final class SmsDelete extends SmsClause<SmsDelete> {
 
 	SmsDelete(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 	public int commit(){
 		return SmsQuery.delete(context, this);

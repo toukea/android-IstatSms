@@ -22,7 +22,7 @@ import android.content.Context;
  * @author Toukea Tatsi (Istat)
  *
  */
-@Deprecated
+//@Deprecated
 public final class SmsInsert  {
 	 private Sms sms=new Sms();
 	 Context context;
