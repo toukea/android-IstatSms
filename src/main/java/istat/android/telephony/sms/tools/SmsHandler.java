@@ -58,7 +58,7 @@ public final  class SmsHandler {
 
 	public int sendSms(String address, String body) {
 		this.tmpSMS = new Sms(address, body);
-		int out=Util.sendSMS(address, body, getSendIntent()==null?null:PendingIntent.getBroadcast(context,
+		int out= Util.sendSMS(address, body, getSendIntent()==null?null:PendingIntent.getBroadcast(context,
 				getSendIntentRequestCode(), getSendIntent(),
 				getSendIntentFlag()), getDeliveryIntent()==null?null:PendingIntent.getBroadcast(context,
 				getDeliveryIntentrequestCode(), getDeliveryIntent(),
@@ -124,7 +124,7 @@ public final  class SmsHandler {
 			// TODO Auto-generated method stub
 			switch (getResultCode()) {
 			case Activity.RESULT_OK:
-				// [… send success actions … ];
+				// [ï¿½ send success actions ï¿½ ];
 				if (mSendCallBack != null)
 					mSendCallBack.onSuccesSending(tmpSMS);
 				break;
@@ -133,12 +133,12 @@ public final  class SmsHandler {
 					mSendCallBack.onSuccesSending(tmpSMS);
 				break;
 			case SmsManager.RESULT_ERROR_RADIO_OFF:
-				// [… Radio off failure actions …];
+				// [ï¿½ Radio off failure actions ï¿½];
 				if (mSendCallBack != null)
 					mSendCallBack.onSuccesSending(tmpSMS);
 				break;
 			case SmsManager.RESULT_ERROR_NULL_PDU:
-				// [… null PDU failure actions … ];
+				// [ï¿½ null PDU failure actions ï¿½ ];
 				if (mSendCallBack != null)
 					mSendCallBack.onSuccesSending(tmpSMS);
 				break;
@@ -154,7 +154,7 @@ public final  class SmsHandler {
 
 			switch (getResultCode()) {
 			case Activity.RESULT_OK:
-				// [… send success actions … ];
+				// [ï¿½ send success actions ï¿½ ];
 				if (mDeliveryCallBack != null)
 					mDeliveryCallBack.onSuccesDelivery(tmpSMS);
 				break;

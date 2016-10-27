@@ -1,7 +1,5 @@
 package istat.android.telephony.sms.provider.operation;
 
-
-
 import istat.android.telephony.sms.Sms;
 import android.content.Context;
 /*
@@ -24,72 +22,73 @@ import android.content.Context;
  * @author Toukea Tatsi (Istat)
  *
  */
- public final  class SmsUpdate extends SmsClause<SmsUpdate> {
+@Deprecated
+public final class SmsInsert  {
 	 private Sms sms=new Sms();
-	 SmsUpdate(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+	 Context context;
+	 SmsInsert(Context context) {
+		this.context=context;
 	}
-	public SmsUpdate setLike(Sms smsLike){
+	public SmsInsert setSms(Sms smsLike){
 		sms=smsLike;
 		return this;
 	}
 	public int execute(){
-		 return SmsQuery.update(context,sms, this);
+		 return SmsQuery.insert(context,sms);
 	}
-	public SmsUpdate set_id(String _id) {
+	public SmsInsert set_id(String _id) {
 		sms._id = _id;
 		return this;
 	}
-	public SmsUpdate setAddress(String address) {
+	public SmsInsert setAddress(String address) {
 		sms.address = address;
 		return this;
 	}
-	public SmsUpdate setBody(String body) {
+	public SmsInsert setBody(String body) {
 		sms.body = body;
 		return this;
 	}
-	public SmsUpdate setDate(String date) {
+	public SmsInsert setDate(String date) {
 		sms.date = date;
 		return this;
 	}
-	public SmsUpdate setLocked(String locked) {
+	public SmsInsert setLocked(String locked) {
 		sms.locked = locked;
 		return this;
 	}
-	public SmsUpdate setPerson(String person) {
+	public SmsInsert setPerson(String person) {
 		sms.person = person;
 		return this;
 	}
-	public SmsUpdate setProtocol(String protocol) {
+	public SmsInsert setProtocol(String protocol) {
 		sms.protocol = protocol;
 		return this;
 	}
-	public SmsUpdate setRead(String read) {
+	public SmsInsert setRead(String read) {
 		sms.read = read;
 		return this;
 	}
-	public SmsUpdate setReply_path_present(String reply_path_present) {
+	public SmsInsert setReply_path_present(String reply_path_present) {
 		sms.reply_path_present = reply_path_present;
 		return this;
 	}
-	public SmsUpdate setService_center(String service_center) {
+	public SmsInsert setService_center(String service_center) {
 		sms.service_center = service_center;
 		return this;
 	}
-	public SmsUpdate setStatus(String status) {
+	public SmsInsert setStatus(String status) {
 		sms.status = status;
 		return this;
 	}
-	public SmsUpdate setSubject(String subject) {
+	public SmsInsert setSubject(String subject) {
 		sms.subject = subject;
 		return this;
 	}
-	public SmsUpdate setThread_id(String thread_id) {
+	public SmsInsert setThread_id(String thread_id) {
 		sms.thread_id = thread_id;
 		return this;
 	}
-	public SmsUpdate setType(String type) {
+	public SmsInsert setType(String type) {
 		sms.type = type;
 		return this;
 	}

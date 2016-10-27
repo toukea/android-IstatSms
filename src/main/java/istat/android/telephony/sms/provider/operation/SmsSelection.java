@@ -1,6 +1,10 @@
 package istat.android.telephony.sms.provider.operation;
 
 
+import istat.android.telephony.sms.Sms;
+
+import java.util.List;
+
 import android.content.Context;
 /*
  * Copyright (C) 2014 Istat Dev.
@@ -22,14 +26,13 @@ import android.content.Context;
  * @author Toukea Tatsi (Istat)
  *
  */
-public final class SmsDelete extends SmsClause<SmsDelete> {
+public final class SmsSelection extends SmsClause<SmsSelection> {
 
-	SmsDelete(Context context) {
+	SmsSelection(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
-	public int commit(){
-		return SmsQuery.delete(context, this);
+	public List<Sms> execute(){
+		return SmsQuery.exec(context, this);
 	}
 	
 }

@@ -1,14 +1,10 @@
 package istat.android.telephony.sms;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.PendingIntent;
-import android.content.Context;
-import android.telephony.SmsManager;
+
 import istat.android.telephony.sms.tools.SmsHandler;
 import istat.android.telephony.sms.tools.Util;
 

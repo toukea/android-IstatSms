@@ -180,7 +180,7 @@ public final class SmsSender {
 				// TODO Auto-generated method stub
 				switch (getResultCode()) {
 				case Activity.RESULT_OK:
-					// [… send success actions … ];
+					// [ï¿½ send success actions ï¿½ ];
 					if (mSendCallBack != null) {
 						successCount++;
 						if (successCount >= smsCount) {
@@ -196,14 +196,14 @@ public final class SmsSender {
 					}
 					break;
 				case SmsManager.RESULT_ERROR_RADIO_OFF:
-					// [… Radio off failure actions …];
+					// [ï¿½ Radio off failure actions ï¿½];
 					if (mSendCallBack != null) {
 						mSendCallBack.onRadioOffFail(tmpSMS);
 						unregisterSendWatcher();
 					}
 					break;
 				case SmsManager.RESULT_ERROR_NULL_PDU:
-					// [… null PDU failure actions … ];
+					// [ï¿½ null PDU failure actions ï¿½ ];
 					if (mSendCallBack != null) {
 						mSendCallBack.onBadformedSmsFail(tmpSMS);
 						unregisterSendWatcher();
@@ -225,7 +225,7 @@ public final class SmsSender {
 
 				switch (getResultCode()) {
 				case Activity.RESULT_OK:
-					// [… send success actions … ];
+					// [ï¿½ send success actions ï¿½ ];
 					if (mDeliveryCallBack != null)
 						mDeliveryCallBack.onSuccesDelivery(tmpSMS);
 					break;
