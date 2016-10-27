@@ -32,7 +32,7 @@ public final class SmsSelection extends SmsClause<SmsSelection> {
 		super(context);
 	}
 	public List<Sms> execute(){
-		return SmsQuery.exec(context, this);
+		return SmsQuery.executeQuery(context, this);
 	}
 	
 }

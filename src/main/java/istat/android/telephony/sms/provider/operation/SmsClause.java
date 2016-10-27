@@ -611,13 +611,13 @@ abstract class SmsClause<T extends SmsClause<T>> {
     public String[] getWhereParams() {
         if (whereParams.size() == 0)
             return null;
-        String[] tmp = new String[whereParams.size()];
+        String[] tmpS = new String[whereParams.size()];
         int i = 0;
-        for (String tmps : whereParams) {
-            tmp[i] = tmps;
+        for (String tmp : whereParams) {
+            tmpS[i] = tmp;
             i++;
         }
-        return tmp;
+        return tmpS;
     }
 
     public void setOrderBy(String orderBy) {
@@ -633,8 +633,8 @@ abstract class SmsClause<T extends SmsClause<T>> {
     }
 
     // ----------------------------------------------------
-    List<Sms> exec(Context context) {
-        return SmsQuery.exec(context, this);
+    List<Sms> executeQuery(Context context) {
+        return SmsQuery.executeQuery(context, this);
     }
 
 }

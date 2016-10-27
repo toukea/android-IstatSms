@@ -148,7 +148,7 @@ import android.net.Uri;
 		int out = context.getContentResolver().delete(uriSms, query.getWhereClose(), query.getWhereParams());
 		return out;
 	}
-	public static List<Sms> exec(Context context, SmsClause<?> query){
+	public static List<Sms> executeQuery(Context context, SmsClause<?> query){
 		List<Sms> list=new ArrayList<Sms>();
 		
 		Sms sms;
