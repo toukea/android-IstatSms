@@ -28,7 +28,7 @@ public final class SmsDelete extends SmsClause<SmsDelete> {
 	SmsDelete(Context context) {
 		super(context);
 	}
-	public int commit(){
+	public int execute(){
 		return SmsQuery.delete(context, this);
 	}
 	

@@ -2,7 +2,7 @@ package istat.android.telephony.sms;
 
 import istat.android.telephony.sms.provider.operation.SmsDelete;
 import istat.android.telephony.sms.provider.operation.SmsInsert;
-import istat.android.telephony.sms.provider.operation.SmsProviderOperation;
+import istat.android.telephony.sms.provider.operation.SmsQueryProvider;
 import istat.android.telephony.sms.provider.operation.SmsSelection;
 import istat.android.telephony.sms.provider.operation.SmsUpdate;
 
@@ -35,19 +35,19 @@ public final class SmsQL {
     }
 
     public SmsSelection selectSms() {
-        return SmsProviderOperation.getSelectStatement(context);
+        return SmsQueryProvider.getSelectStatement(context);
     }
 
     public SmsInsert insertSms() {
-        return SmsProviderOperation.getInsertStatement(context);
+        return SmsQueryProvider.getInsertStatement(context);
     }
 
     public SmsDelete deleteSms() {
-        return SmsProviderOperation.getDeleteStatement(context);
+        return SmsQueryProvider.getDeleteStatement(context);
     }
 
     public SmsUpdate updateSms() {
-        return SmsProviderOperation.getUpdateStatement(context);
+        return SmsQueryProvider.getUpdateStatement(context);
     }
 
     public int insertOrUpdate(Sms sms) {

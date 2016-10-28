@@ -462,48 +462,48 @@ abstract class SmsClause<T extends SmsClause<T>> {
         return (T) this;
     }
 
-    public T orDateLessThan(String value) {
+    public T orDateLessThan(long value) {
         if (whereClose == null)
             whereClose = "date= ?";
         else
             whereClose += " OR date < ?";
-        whereParams.add(value);
+        whereParams.add(""+value);
         return (T) this;
     }
 
-    public T orDateGreatOrEqual(String value) {
+    public T orDateGreatOrEqual(long value) {
         if (whereClose == null)
             whereClose = "date= ?";
         else
             whereClose += " OR date >= ?";
-        whereParams.add(value);
+        whereParams.add(""+value);
         return (T) this;
     }
 
-    public T orDateGreatThan(String value) {
+    public T orDateGreatThan(long value) {
         if (whereClose == null)
             whereClose = "date= ?";
         else
             whereClose += " OR date > ?";
-        whereParams.add(value);
+        whereParams.add(""+value);
         return (T) this;
     }
 
-    public T orDateLessOrEqual(String value) {
+    public T orDateLessOrEqual(long value) {
         if (whereClose == null)
             whereClose = "date= ?";
         else
             whereClose += " OR date <= ?";
-        whereParams.add(value);
+        whereParams.add(""+value);
         return (T) this;
     }
 
-    public T orDateEqual(String value) {
+    public T orDateEqual(long value) {
         if (whereClose == null)
             whereClose = "date= ?";
         else
             whereClose += " OR date= ?";
-        whereParams.add(value);
+        whereParams.add(""+value);
         return (T) this;
     }
 

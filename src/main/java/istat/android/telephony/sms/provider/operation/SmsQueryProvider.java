@@ -21,7 +21,7 @@ import android.content.Context;
  * @author Toukea Tatsi (Istat)
  *
  */
-public final class SmsProviderOperation {
+public final class SmsQueryProvider {
 
 	public static final SmsSelection getSelectStatement(Context context){
 		return new SmsSelection(context);

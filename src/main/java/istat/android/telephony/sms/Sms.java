@@ -4,6 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.PendingIntent;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import istat.android.telephony.sms.tools.SmsHandler;
 import istat.android.telephony.sms.tools.Util;
@@ -23,199 +25,241 @@ import istat.android.telephony.sms.tools.Util;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * 
  * @author Toukea Tatsi (Istat)
- * 
  */
-public final class Sms /*implements Parcelable*/{
-	public static String MESSAGE_TYPE_ALL = "0", MESSAGE_TYPE_INBOX = "1",
-			MESSAGE_TYPE_SENT = "2", MESSAGE_TYPE_DRAFT = "3",
-			MESSAGE_TYPE_OUTBOX = "4", MESSAGE_TYPE_FAILED = "5",
-			MESSAGE_TYPE_QUEUED = "6";
-	public String _id, thread_id, address, person, date, protocol, read,
-			status, type, reply_path_present, subject, body, service_center,
-			locked;
+public final class Sms implements Parcelable {
+    public static final String TYPE_MESSAGE_ALL = "0", TYPE_MESSAGE_INBOX = "1",
+            TYPE_MESSAGE_SENT = "2", TYPE_MESSAGE_DRAFT = "3",
+            TYPE_MESSAGE_OUTBOX = "4", TYPE_MESSAGE_FAILED = "5",
+            TYPE_MESSAGE_QUEUED = "6";
+    public String _id, thread_id, address, person, date, protocol, read,
+            status, type, reply_path_present, subject, body, service_center,
+            locked;
 
-	public Sms() {
-	}
+    public Sms() {
+    }
 
-	public Sms(String id, String address, String body) {
-		this._id = id;
-		this.address = address;
-		this.body = body;
-	}
+    public Sms(String id, String address, String body) {
+        this._id = id;
+        this.address = address;
+        this.body = body;
+    }
 
-	public Sms(String address, String body) {
-		this.address = address;
-		this.body = body;
-	}
+    public Sms(String address, String body) {
+        this.address = address;
+        this.body = body;
+    }
 
-	// ------------------------------------------------------------
-	public void send() {
-		Util.sendSMS(address, body, null, null);
-	}
+    protected Sms(Parcel in) {
+        _id = in.readString();
+        thread_id = in.readString();
+        address = in.readString();
+        person = in.readString();
+        date = in.readString();
+        protocol = in.readString();
+        read = in.readString();
+        status = in.readString();
+        type = in.readString();
+        reply_path_present = in.readString();
+        subject = in.readString();
+        body = in.readString();
+        service_center = in.readString();
+        locked = in.readString();
+    }
 
-	public void send(PendingIntent sendPIntent, PendingIntent receivIntent) {
-		Util.sendSMS(address, body, sendPIntent, receivIntent);
-	}
+    public static final Creator<Sms> CREATOR = new Creator<Sms>() {
+        @Override
+        public Sms createFromParcel(Parcel in) {
+            return new Sms(in);
+        }
 
-	public void send(SmsHandler config) {
-		config.sendSms(address, body);
-	}
+        @Override
+        public Sms[] newArray(int size) {
+            return new Sms[size];
+        }
+    };
 
-	// ------------------------------------------------------------
+    // ------------------------------------------------------------
+    public void send() {
+        Util.sendSMS(address, body, null, null);
+    }
 
-	// -------------------------------------------------------------
-	public void set_id(String _id) {
-		this._id = _id;
-	}
+    public void send(PendingIntent sendPIntent, PendingIntent receivIntent) {
+        Util.sendSMS(address, body, sendPIntent, receivIntent);
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void send(SmsHandler config) {
+        config.sendSms(address, body);
+    }
 
-	public void setBody(String body) {
-		this.body = body;
-	}
+    // ------------------------------------------------------------
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    // -------------------------------------------------------------
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
-	public void setLocked(String locked) {
-		this.locked = locked;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setPerson(String person) {
-		this.person = person;
-	}
+    public void setBody(String body) {
+        this.body = body;
+    }
 
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public void setRead(String read) {
-		this.read = read;
-	}
+    public void setLocked(String locked) {
+        this.locked = locked;
+    }
 
-	public void setReply_path_present(String reply_path_present) {
-		this.reply_path_present = reply_path_present;
-	}
+    public void setPerson(String person) {
+        this.person = person;
+    }
 
-	public void setService_center(String service_center) {
-		this.service_center = service_center;
-	}
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setRead(String read) {
+        this.read = read;
+    }
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
+    public void setReply_path_present(String reply_path_present) {
+        this.reply_path_present = reply_path_present;
+    }
 
-	public void setThread_id(String thread_id) {
-		this.thread_id = thread_id;
-	}
+    public void setService_center(String service_center) {
+        this.service_center = service_center;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public String get_id() {
-		return _id;
-	}
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setThread_id(String thread_id) {
+        this.thread_id = thread_id;
+    }
 
-	public String getBody() {
-		return body;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public String get_id() {
+        return _id;
+    }
 
-	public String getLocked() {
-		return locked;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getPerson() {
-		return person;
-	}
+    public String getBody() {
+        return body;
+    }
 
-	public String getProtocol() {
-		return protocol;
-	}
+    public String getDate() {
+        return date;
+    }
 
-	public String getRead() {
-		return read;
-	}
+    public String getLocked() {
+        return locked;
+    }
 
-	public String getReply_path_present() {
-		return reply_path_present;
-	}
+    public String getPerson() {
+        return person;
+    }
 
-	public String getService_center() {
-		return service_center;
-	}
+    public String getProtocol() {
+        return protocol;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getRead() {
+        return read;
+    }
 
-	public String getSubject() {
-		return subject;
-	}
+    public String getReply_path_present() {
+        return reply_path_present;
+    }
 
-	public String getThread_id() {
-		return thread_id;
-	}
+    public String getService_center() {
+        return service_center;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		try {
-			return toJSON().toString();
-		} catch (Exception e) {
+    public String getSubject() {
+        return subject;
+    }
 
-		}
-		return "";
-	}
+    public String getThread_id() {
+        return thread_id;
+    }
 
-	public JSONObject toJSON() throws JSONException {
-		JSONObject json = new JSONObject();
-		json.accumulate("_id", _id);
-		json.accumulate("thread_id", thread_id);
-		json.accumulate("address", address);
-		json.accumulate("person", person);
+    public String getType() {
+        return type;
+    }
 
-		json.accumulate("date", date);
-		json.accumulate("protocol", protocol);
-		json.accumulate("read", read);
-		json.accumulate("status", status);
+    @Override
+    public String toString() {
+        return toJson().toString();
+    }
 
-		json.accumulate("type", type);
-		json.accumulate("reply_path_present", reply_path_present);
-		json.accumulate("subject", subject);
-		json.accumulate("body", body);
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        try {
+            json.accumulate("_id", _id);
+            json.accumulate("thread_id", thread_id);
+            json.accumulate("address", address);
+            json.accumulate("person", person);
 
-		json.accumulate("service_center", service_center);
-		json.accumulate("locked", locked);
-		return json;
-	}
-	/*
-	 * public static int insertSms(Context context,Sms sms){ return
-	 * SmsQuery.insert(context,sms); } public static boolean
-	 * smsExistWithId(Context context,String id){ return
-	 * SmsQuery.smsIdExist(context, id); }
-	 */
+            json.accumulate("date", date);
+            json.accumulate("protocol", protocol);
+            json.accumulate("read", read);
+            json.accumulate("status", status);
 
+            json.accumulate("type", type);
+            json.accumulate("reply_path_present", reply_path_present);
+            json.accumulate("subject", subject);
+            json.accumulate("body", body);
+
+            json.accumulate("service_center", service_center);
+            json.accumulate("locked", locked);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id);
+        dest.writeString(thread_id);
+        dest.writeString(address);
+        dest.writeString(person);
+        dest.writeString(date);
+        dest.writeString(protocol);
+        dest.writeString(read);
+        dest.writeString(status);
+        dest.writeString(type);
+        dest.writeString(reply_path_present);
+        dest.writeString(subject);
+        dest.writeString(body);
+        dest.writeString(service_center);
+        dest.writeString(locked);
+    }
 }

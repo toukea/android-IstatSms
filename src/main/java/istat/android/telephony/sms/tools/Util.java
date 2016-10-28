@@ -38,10 +38,10 @@ public final class Util {
 	}
 
 	public static int sendSMS(String address, String body,
-			PendingIntent sendPIntent, PendingIntent receivIntent) {
+			PendingIntent sendPIntent, PendingIntent receiveIntent) {
 		SmsManager sms = SmsManager.getDefault();
 		if (body.length() <= 160) {
-			sms.sendTextMessage(address, null, body, sendPIntent, receivIntent);
+			sms.sendTextMessage(address, null, body, sendPIntent, receiveIntent);
 			return 1;
 		} else {
 			ArrayList<String> parts = sms.divideMessage(body);
@@ -49,11 +49,11 @@ public final class Util {
 			ArrayList<PendingIntent> deliveryIntents = new ArrayList<PendingIntent>();
 			for (int i = 0; i <= parts.size(); i++) {
 				sendIntents.add(sendPIntent);
-				deliveryIntents.add(receivIntent);
+				deliveryIntents.add(receiveIntent);
 			}
 			if (sendPIntent == null)
 				sendIntents = null;
-			if (receivIntent == null)
+			if (receiveIntent == null)
 				deliveryIntents = null;
 			sms.sendMultipartTextMessage(address, null, parts, sendIntents,
 					deliveryIntents);
@@ -62,27 +62,27 @@ public final class Util {
 	}
 
 	public static int sendSMS(String address, String body, Intent sendIntent,
-			Intent receivIntent, Context context) {
+			Intent receiveIntent, Context context) {
 		SmsManager sms = SmsManager.getDefault();
 		if (body.length() <= 160) {
 			sms.sendTextMessage(address, null, body,
 					PendingIntent.getBroadcast(context, 0, sendIntent, 0),
-					PendingIntent.getBroadcast(context, 0, receivIntent, 0));
+					PendingIntent.getBroadcast(context, 0, receiveIntent, 0));
 			return 1;
 		} else {
 			ArrayList<String> parts = sms.divideMessage(body);
 			ArrayList<PendingIntent> sendIntents = new ArrayList<PendingIntent>();
 			ArrayList<PendingIntent> deliveryIntents = new ArrayList<PendingIntent>();
-			if (sendIntent == null && receivIntent == null)
+			if (sendIntent == null && receiveIntent == null)
 				for (int i = 0; i <= parts.size(); i++) {
 					sendIntents.add(PendingIntent.getBroadcast(context, 0,
 							sendIntent, 0));
 					deliveryIntents.add(PendingIntent.getBroadcast(context, 0,
-							receivIntent, 0));
+							receiveIntent, 0));
 				}
 			if (sendIntent == null)
 				sendIntents = null;
-			if (receivIntent == null)
+			if (receiveIntent == null)
 				deliveryIntents = null;
 			sms.sendMultipartTextMessage(address, null, parts, sendIntents,
 					deliveryIntents);
