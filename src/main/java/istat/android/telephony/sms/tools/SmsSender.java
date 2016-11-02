@@ -78,6 +78,7 @@ public final class SmsSender {
 		return sendSms(address, body, sendCallBack, null);
 	}
 
+	@SuppressWarnings("WrongConstant")
 	public int sendSms(String address, String body) {
 		this.tmpSMS = new Sms(address, body);
 		int out = Util.optSmsBodyPartNumber(body);
@@ -98,7 +99,7 @@ public final class SmsSender {
 						context, getSendIntentRequestCode(), getSendIntent(),
 						getSendIntentFlag()),
 				getDeliveryIntent() == null ? null : PendingIntent
-						.getBroadcast(context, getDeliveryIntentrequestCode(),
+						.getBroadcast(context, getDeliveryIntentRequestCode(),
 								getDeliveryIntent(), getDeliveryIntentFlag()));
 		return out;
 	}
@@ -177,14 +178,13 @@ public final class SmsSender {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				// TODO Auto-generated method stub
 				switch (getResultCode()) {
 				case Activity.RESULT_OK:
 					// [� send success actions � ];
 					if (mSendCallBack != null) {
 						successCount++;
 						if (successCount >= smsCount) {
-							mSendCallBack.onSuccesSending(tmpSMS);
+							mSendCallBack.onSuccessSending(tmpSMS);
 							unregisterSendWatcher();
 						}
 					}
@@ -205,7 +205,7 @@ public final class SmsSender {
 				case SmsManager.RESULT_ERROR_NULL_PDU:
 					// [� null PDU failure actions � ];
 					if (mSendCallBack != null) {
-						mSendCallBack.onBadformedSmsFail(tmpSMS);
+						mSendCallBack.onBadFormedSmsFail(tmpSMS);
 						unregisterSendWatcher();
 					}
 					break;
@@ -221,17 +221,16 @@ public final class SmsSender {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				// TODO Auto-generated method stub
 
 				switch (getResultCode()) {
 				case Activity.RESULT_OK:
 					// [� send success actions � ];
 					if (mDeliveryCallBack != null)
-						mDeliveryCallBack.onSuccesDelivery(tmpSMS);
+						mDeliveryCallBack.onSuccessDelivery(tmpSMS);
 					break;
 				default:
 					if (mDeliveryCallBack != null)
-						mDeliveryCallBack.onEchecDelivery(tmpSMS);
+						mDeliveryCallBack.onFailDelivery(tmpSMS);
 					break;
 
 				}
@@ -284,7 +283,7 @@ public final class SmsSender {
 		return sendConfig != null ? sendConfig.requestCode : 0;
 	}
 
-	private int getDeliveryIntentrequestCode() {
+	private int getDeliveryIntentRequestCode() {
 		return deliveryConfig != null ? deliveryConfig.requestCode : 0;
 	}
 
@@ -298,19 +297,19 @@ public final class SmsSender {
 	// return mIncomeReceiver;
 	// }
 	public interface SendCallBack {
-		public void onSuccesSending(Sms sms);
+		public void onSuccessSending(Sms sms);
 
 		public void onGenericFail(Sms sms);
 
 		public void onRadioOffFail(Sms sms);
 
-		public void onBadformedSmsFail(Sms sms);
+		public void onBadFormedSmsFail(Sms sms);
 	}
 
 	public interface DeliveryCallBack {
-		public void onSuccesDelivery(Sms sms);
+		public void onSuccessDelivery(Sms sms);
 
-		public void onEchecDelivery(Sms sms);
+		public void onFailDelivery(Sms sms);
 	}
 
 	public static class HandlerConfig {

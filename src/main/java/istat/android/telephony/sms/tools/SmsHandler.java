@@ -33,6 +33,7 @@ import android.telephony.SmsMessage;
  * @author Toukea Tatsi (Istat)
  * 
  */
+@SuppressWarnings("WrongConstant")
 @Deprecated
 public final  class SmsHandler {
 	public static String INTENT_SMS_RECEIVED="android.provider.Telephony.SMS_RECEIVED";
@@ -61,7 +62,7 @@ public final  class SmsHandler {
 		int out= Util.sendSMS(address, body, getSendIntent()==null?null:PendingIntent.getBroadcast(context,
 				getSendIntentRequestCode(), getSendIntent(),
 				getSendIntentFlag()), getDeliveryIntent()==null?null:PendingIntent.getBroadcast(context,
-				getDeliveryIntentrequestCode(), getDeliveryIntent(),
+				getDeliveryIntentRequestCode(), getDeliveryIntent(),
 				getDeliveryIntentFlag()));
 		if (getSendIntent() != null) {
 			IntentFilter flt = new IntentFilter(getSendIntent().getAction());
@@ -121,26 +122,25 @@ public final  class SmsHandler {
 	private BroadcastReceiver mSendReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
 			switch (getResultCode()) {
 			case Activity.RESULT_OK:
 				// [� send success actions � ];
 				if (mSendCallBack != null)
-					mSendCallBack.onSuccesSending(tmpSMS);
+					mSendCallBack.onSuccessSending(tmpSMS);
 				break;
 			case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
 				if (mSendCallBack != null)
-					mSendCallBack.onSuccesSending(tmpSMS);
+					mSendCallBack.onSuccessSending(tmpSMS);
 				break;
 			case SmsManager.RESULT_ERROR_RADIO_OFF:
 				// [� Radio off failure actions �];
 				if (mSendCallBack != null)
-					mSendCallBack.onSuccesSending(tmpSMS);
+					mSendCallBack.onSuccessSending(tmpSMS);
 				break;
 			case SmsManager.RESULT_ERROR_NULL_PDU:
 				// [� null PDU failure actions � ];
 				if (mSendCallBack != null)
-					mSendCallBack.onSuccesSending(tmpSMS);
+					mSendCallBack.onSuccessSending(tmpSMS);
 				break;
 			}
 
@@ -150,17 +150,16 @@ public final  class SmsHandler {
 		
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
 
 			switch (getResultCode()) {
 			case Activity.RESULT_OK:
 				// [� send success actions � ];
 				if (mDeliveryCallBack != null)
-					mDeliveryCallBack.onSuccesDelivery(tmpSMS);
+					mDeliveryCallBack.onSuccessDelivery(tmpSMS);
 				break;
 			default:
 				if (mDeliveryCallBack != null)
-					mDeliveryCallBack.onEchecDelivery(tmpSMS);
+					mDeliveryCallBack.onFailDelivery(tmpSMS);
 				break;
 
 			}
@@ -170,7 +169,6 @@ public final  class SmsHandler {
 	private BroadcastReceiver mIncomeReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
 			mWatcher.onReceiveSms(decode(context, intent),this);
 		}
 	};
@@ -243,7 +241,7 @@ public final  class SmsHandler {
 		return sendConfig != null ? sendConfig.requestCode : 0;
 	}
 
-	private int getDeliveryIntentrequestCode() {
+	private int getDeliveryIntentRequestCode() {
 		return deliveryConfig != null ? deliveryConfig.requestCode : 0;
 	}
 //	public BroadcastReceiver getSendReceiver() {
@@ -259,7 +257,7 @@ public final  class SmsHandler {
 		public void onReceiveSms(Sms sms,BroadcastReceiver receiver);
 	}
 	public interface SendCallBack {
-		public void onSuccesSending(Sms sms);
+		public void onSuccessSending(Sms sms);
 
 		public void onGenericFail(Sms sms);
 
@@ -269,9 +267,9 @@ public final  class SmsHandler {
 	}
 
 	public interface DeliveryCallBack {
-		public void onSuccesDelivery(Sms sms);
+		public void onSuccessDelivery(Sms sms);
 
-		public void onEchecDelivery(Sms sms);
+		public void onFailDelivery(Sms sms);
 	}
 
 	public static class HandlerConfig {

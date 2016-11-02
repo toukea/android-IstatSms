@@ -54,7 +54,7 @@ public final class SmsQL {
         if (selectSms().whereIdEqual(sms._id).execute().size() > 0)
             return updateSms().setLike(sms).execute();
         else
-            return insertSms().setSms(sms).execute();
+            return insertSms().setAs(sms).execute();
     }
 
     public boolean smsExist(String id) {

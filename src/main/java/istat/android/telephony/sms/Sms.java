@@ -1,11 +1,11 @@
 package istat.android.telephony.sms;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.PendingIntent;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import istat.android.telephony.sms.tools.SmsHandler;
 import istat.android.telephony.sms.tools.Util;
@@ -39,12 +39,14 @@ public final class Sms implements Parcelable {
             locked;
 
     public Sms() {
+
     }
 
     public Sms(String id, String address, String body) {
         this._id = id;
         this.address = address;
         this.body = body;
+        this.date = System.currentTimeMillis() + "";
     }
 
     public Sms(String address, String body) {
@@ -166,6 +168,9 @@ public final class Sms implements Parcelable {
     }
 
     public String getDate() {
+        if (TextUtils.isEmpty(date)) {
+            return System.currentTimeMillis() + "";
+        }
         return date;
     }
 
