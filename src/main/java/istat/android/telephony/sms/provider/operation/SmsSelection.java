@@ -3,9 +3,11 @@ package istat.android.telephony.sms.provider.operation;
 
 import istat.android.telephony.sms.Sms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.database.Cursor;
 /*
  * Copyright (C) 2014 Istat Dev.
  *
@@ -21,18 +23,23 @@ import android.content.Context;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * 
  * @author Toukea Tatsi (Istat)
- *
  */
 public final class SmsSelection extends SmsClause<SmsSelection> {
 
-	SmsSelection(Context context) {
-		super(context);
-	}
-	public List<Sms> execute(){
-		return SmsQuery.executeQuery(context, this);
-	}
-	
+    SmsSelection(Context context) {
+        super(context);
+    }
+
+    public List<Sms> execute() {
+        return SmsQuery.executeQuery(context, this);
+    }
+
+    public int count() {
+        return SmsQuery.count(context, this);
+    }
+
+
 }

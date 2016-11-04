@@ -160,9 +160,19 @@ final class SmsQuery {
         return out;
     }
 
+    public static int count(Context context, SmsClause<?> query) {
+        Cursor c = context.getContentResolver().query(uriSms,
+                new String[]{projection[0]},
+                query.getWhereClose(),
+                query.getWhereParams(),
+                query.getOrderBy());
+        int count = c.getCount();
+        c.close();
+        return count;
+    }
+
     public static List<Sms> executeQuery(Context context, SmsClause<?> query) {
         List<Sms> list = new ArrayList<Sms>();
-
         Sms sms;
         Cursor c = context.getContentResolver().query(uriSms,
                 projection,
@@ -188,6 +198,7 @@ final class SmsQuery {
             sms.setLocked(c.getString(13));
             list.add(sms);
         }
+        c.close();
         return list;
     }
 
