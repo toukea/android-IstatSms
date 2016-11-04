@@ -55,6 +55,20 @@ delete record from SmsProvider data base
         .or...
         .execute();
 ```
+multiple nested sms selection 
+```java
+        SmsSelection selection1 = sql.selectSms().whereAdressEqual("40101383");
+        SmsSelection selection2 = sql.selectSms().whereBodyLike("hello");
+        SmsSelection selection3 = sql.selectSms().whereBodyLike("world");
+        List<Sms> smss = sql.selectSms().WHERE(selection1).AND(selection2).OR(selection3).execute();
+```
+multiple nested sms update
+```java
+        SmsSelection selection1 = sql.selectSms().whereAdressEqual("40101383");
+        SmsSelection selection2 = sql.selectSms().whereBodyLike("hello");
+        SmsSelection selection3 = sql.selectSms().whereBodyLike("world");
+        List<Sms> smss = sql.selectSms().WHERE(selection1).AND(selection2).OR(selection3).execute();
+```
 
 # Send Sms
 
