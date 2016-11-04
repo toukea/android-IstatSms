@@ -63,7 +63,8 @@ multiple nested sms selection
         List<Sms> smss = sql.selectSms()
         .WHERE(selection1)
         .AND(selection2)
-        .OR(selection3).execute();
+        .OR(selection3)
+        .execute();
 ```
 multiple nested sms update
 ```java
@@ -74,14 +75,15 @@ multiple nested sms update
          .setBody("Hello World")
          .WHERE(selection1)
          .AND(selection2)
-         .OR(selection3).execute();
+         .OR(selection3)
+         .execute();
 ```
 
 # Send Sms
 
 //Documentation in progress.. :-)
 
-# Watch for incomming Sms
+# Watch for incoming Sms
 
 //Documentation in progress.. :-)
 
