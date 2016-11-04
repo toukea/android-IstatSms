@@ -60,14 +60,21 @@ multiple nested sms selection
         SmsSelection selection1 = sql.selectSms().whereAdressEqual("40101383");
         SmsSelection selection2 = sql.selectSms().whereBodyLike("hello");
         SmsSelection selection3 = sql.selectSms().whereBodyLike("world");
-        List<Sms> smss = sql.selectSms().WHERE(selection1).AND(selection2).OR(selection3).execute();
+        List<Sms> smss = sql.selectSms()
+        .WHERE(selection1)
+        .AND(selection2)
+        .OR(selection3).execute();
 ```
 multiple nested sms update
 ```java
         SmsSelection selection1 = sql.selectSms().whereAdressEqual("40101383");
         SmsSelection selection2 = sql.selectSms().whereBodyLike("hello");
         SmsSelection selection3 = sql.selectSms().whereBodyLike("world");
-        List<Sms> smss = sql.selectSms().WHERE(selection1).AND(selection2).OR(selection3).execute();
+         int count = sql.updateSms()
+         .setBody("Hello World")
+         .WHERE(selection1)
+         .AND(selection2)
+         .OR(selection3).execute();
 ```
 
 # Send Sms
