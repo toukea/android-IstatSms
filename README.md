@@ -11,7 +11,7 @@ All SmsProvider Request is made using SmsQL class. Sms is describe by a class na
     SmsQL sql= new SmsQL(mContext);
  ```
   
-do a Selection on Smsprovider data base   
+do a Selection on SmsProvider data base   
 ```java
         List<Sms> selectedSms = sql.selectSms().whereAdressEqual("40101383").execute();
         int updateCount = sql.updateSms()
@@ -33,7 +33,7 @@ do an insertion on SmsProvider data base
         .execute();
 ```
 
-update on Smsprovider data base   
+update on SmsProvider data base   
 ```java
         List<Sms> selectedSms = sql.selectSms().whereAdressEqual("40101383").execute();
         int updateCount = sql.updateSms()
