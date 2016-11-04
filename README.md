@@ -11,14 +11,14 @@ All SmsProvider Request is made using SmsQL class. Sms is describe by a class na
     SmsQL sql= new SmsQL(mContext);
  ```
   
-do a selection on Smsprovider data base   
+do a Selection on Smsprovider data base   
 ```java
         List<Sms> selectedSms = sql.selectSms().whereAdressEqual("40101383").execute();
         int updateCount = sql.updateSms()
-        .setBody("new body")
-        .set....
-        .set....
-        .setSubject("new subject")
+        .whereAdressEqual("40101383")
+        .and....
+        .or....
+        .andBodyLike("hello")
         .execute();
  ``` 
 
@@ -26,19 +26,34 @@ do an insertion on SmsProvider data base
 ```java
         SmsQL sql = new SmsQL(this);
         int insertCount = sql.insertSms()
-        .setAddress("+22575343728")
+        .setAddress("40101383")
         .set....
         .set....
         .setBody("Yooo istat")do a
         .execute();
 ```
+
+update on Smsprovider data base   
+```java
+        List<Sms> selectedSms = sql.selectSms().whereAdressEqual("40101383").execute();
+        int updateCount = sql.updateSms()
+        .setBody("new body")
+        .set....
+        .set....
+        .setSubject("new subject")
+        .whereAdressEqual("40101383")
+        .and...
+        .or...
+        .execute();
+ ``` 
+ 
 delete record from SmsProvider data base
  
 ```java
         int deleteCount = sql.deleteSms()
         .whereAdressEqual("40101383")
-        .where...
-        .where...
+        .and...
+        .or...
         .execute();
 ```
 
