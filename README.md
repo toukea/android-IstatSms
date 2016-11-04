@@ -13,8 +13,7 @@ All SmsProvider Request is made using SmsQL class. Sms is describe by a class na
   
 do a Selection on SmsProvider data base   
 ```java
-        List<Sms> selectedSms = sql.selectSms().whereAdressEqual("40101383").execute();
-        int updateCount = sql.updateSms()
+        List<Sms> selectedSms = sql.selectSms()
         .whereAdressEqual("40101383")
         .and....
         .or....
