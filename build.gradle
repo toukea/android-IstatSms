@@ -1,5 +1,11 @@
 apply plugin: 'com.android.library'
-
+//apply plugin: 'maven'
+//ext {
+//    PUBLISH_GROUP_ID = 'istat.android.telephony.sms'
+//    PUBLISH_ARTIFACT_ID = 'istat-sms'
+//    PUBLISH_VERSION = '1.2.0'
+//}
+// apply from: 'file:///home/istat/Scripts/gradle/android-release-jar.gradle.txt'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"

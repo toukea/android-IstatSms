@@ -467,7 +467,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
             whereClose = "date= ?";
         else
             whereClose += " OR date < ?";
-        whereParams.add(""+value);
+        whereParams.add("" + value);
         return (T) this;
     }
 
@@ -476,7 +476,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
             whereClose = "date= ?";
         else
             whereClose += " OR date >= ?";
-        whereParams.add(""+value);
+        whereParams.add("" + value);
         return (T) this;
     }
 
@@ -485,7 +485,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
             whereClose = "date= ?";
         else
             whereClose += " OR date > ?";
-        whereParams.add(""+value);
+        whereParams.add("" + value);
         return (T) this;
     }
 
@@ -494,7 +494,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
             whereClose = "date= ?";
         else
             whereClose += " OR date <= ?";
-        whereParams.add(""+value);
+        whereParams.add("" + value);
         return (T) this;
     }
 
@@ -503,7 +503,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
             whereClose = "date= ?";
         else
             whereClose += " OR date= ?";
-        whereParams.add(""+value);
+        whereParams.add("" + value);
         return (T) this;
     }
 
@@ -545,13 +545,13 @@ abstract class SmsClause<T extends SmsClause<T>> {
     }
 
     // ----------------------------------------------------
-    public T WHERE(T close) {
+    public T WHERE(SmsSelection close) {
         this.whereClose = close.whereClose;
         this.whereParams = close.whereParams;
         return (T) this;
     }
 
-    public T OR(T close) {
+    public T OR(SmsSelection close) {
         this.whereClose = "(" + this.whereClose + ") OR (" + close.whereClose
                 + ")";
         this.whereParams.addAll(close.whereParams);
@@ -559,7 +559,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
         return (T) this;
     }
 
-    public T AND(T close) {
+    public T AND(SmsSelection close) {
         this.whereClose = "(" + this.whereClose + ") AND (" + close.whereClose
                 + ")";
         this.whereParams.addAll(close.whereParams);
