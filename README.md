@@ -44,6 +44,9 @@ delete record from SmsProvider data base
 
 # Send Sms
 
+//Documentation in progress.. :-)
 
 # Watch for incomming Sms
+
+//Documentation in progress.. :-)
 
