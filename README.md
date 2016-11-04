@@ -29,7 +29,7 @@ do an insertion on SmsProvider data base
         .setAddress("40101383")
         .set....
         .set....
-        .setBody("Yooo istat")do a
+        .setBody("Yooo istat")
         .execute();
 ```
 
