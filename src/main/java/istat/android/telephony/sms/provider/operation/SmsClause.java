@@ -199,7 +199,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
         return (T) this;
     }
 
-    public T whereAdressEqual(String value) {
+    public T whereAddressEqual(String value) {
         if (whereClose == null)
             whereClose = "address= ?";
         else
@@ -634,7 +634,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
 
     // ----------------------------------------------------
     List<Sms> executeQuery(Context context) {
-        return SmsQuery.executeQuery(context, this);
+        return SmsQuery.select(context, this);
     }
 
 }

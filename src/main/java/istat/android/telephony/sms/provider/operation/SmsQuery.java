@@ -171,7 +171,7 @@ final class SmsQuery {
         return count;
     }
 
-    public static List<Sms> executeQuery(Context context, SmsClause<?> query) {
+    public static List<Sms> select(Context context, SmsClause<?> query) {
         List<Sms> list = new ArrayList<Sms>();
         Sms sms;
         Cursor c = context.getContentResolver().query(uriSms,

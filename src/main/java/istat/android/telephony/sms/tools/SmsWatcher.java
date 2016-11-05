@@ -55,20 +55,20 @@ public final class SmsWatcher {
         return new SmsPart(null, null);
     }
 
-    public void setSmsListener(SmsListener listener, int priority) {
+    public void startWatching(SmsListener listener, int priority) {
         this.mListener = listener;
         IntentFilter filter = new IntentFilter(INTENT_SMS_RECEIVED);
         filter.setPriority(priority);
         context.registerReceiver(mIncomeReceiver, filter);
     }
 
-    public void setSmsListener(SmsListener listener) {
+    public void startWatching(SmsListener listener) {
         this.mListener = listener;
         IntentFilter filter = new IntentFilter(INTENT_SMS_RECEIVED);
         context.registerReceiver(mIncomeReceiver, filter);
     }
 
-    public boolean unregisterSmsListener() {
+    public boolean stopWatching() {
         boolean out = mListener != null;
         try {
             if (out) {
