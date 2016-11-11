@@ -88,8 +88,9 @@ public final class SmsWatcher {
     private BroadcastReceiver mIncomeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (mListener != null)
+            if (mListener != null) {
                 mListener.onReceiveSms(decode(context, intent), this);
+            }
         }
     };
     private SmsListener mListener;

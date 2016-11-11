@@ -64,6 +64,14 @@ abstract class SmsClause<T extends SmsClause<T>> {
         return (T) this;
     }
 
+    public T whereAddressLike(String value) {
+        if (whereClose == null)
+            whereClose = "address LIKE \"" + value + "\"";
+        else
+            whereClose += " AND address LIKE \"" + value + "\"";
+        return (T) this;
+    }
+
     public T whereBodyEqual(String value) {
         if (whereClose == null)
             whereClose = "body  = ?";

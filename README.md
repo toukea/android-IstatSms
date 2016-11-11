@@ -79,14 +79,61 @@ multiple nested sms selection
 ```
 
 # Send Sms
-
-//Documentation in progress.. :-)
+You can send sms using SmsSender class.
+```java
+ SmsSender sender = new SmsSender(this);
+ sender.sendSms("40101383", "Hello world", new SmsSender.SendCallBack(){ 
+     @Override
+     public void onSuccessSending(Sms sms) {
+         //when Sms has been sent succesfully.
+     }
+ 
+     @Override
+     public void onGenericFail(Sms sms) {
+        //when Generic Error, ex: no enougth mobile credit.
+     }
+ 
+     @Override
+     public void onRadioOffFail(Sms sms) {
+         //when errordue to mobile network.
+     }
+ 
+     @Override
+     public void onBadFormedSmsFail(Sms sms) {
+         //when sms is bad formed ex: not correct phone number
+     }
+ });
+```
 
 # Watch for incoming Sms
+Using the SmsWatcher, you can watch for incoming Sms
+```java
+SmsWatcher smsWatcher=new SmsWatcher(mContext);
+smsWatcher.startWatching(new SmsListener(){
+@Override
+    public void onReceiveSms(SmsWatcher.SmsPart sms, BroadcastReceiver receiver) {
+        /*
+        Do what you want with your SmsPart instance.
+        it contain phoneNumber and SmsBody.
+        
+        You have also the broadcastReceiver used to receive Sms. (Do what you want with ...)
+        you can for exemple abort them
+        if you don't want auther application to get this sms
+        */
+    }
+})
+```
+There is also possible to watch with some priority (your application can be the first to get the SMS, more priority is big, must you can be the first to get Sms received)
+```java
+smsWatcher.startWatching(mSmsListener, 2147483647)//there, i listen with max priority
+```
+After you have get your incoming Sms or you don't want to watch anymore (ex: the Activity->onDestroy())
+you have to stop watching.
+```java
+smsWatcher.stopWatching();
+```
 
-//Documentation in progress.. :-)
-
-Usage
+#Usage
 -----
 Just add the dependency to your `build.gradle`:
 
@@ -98,7 +145,7 @@ dependencies {
 
 minSdkVersion = 10
 ------------------
-IstatSms is compatibile with Android 2.3 and newer.
+IstatSms is compatible with Android 2.3 and newer.
 
 Download
 --------
