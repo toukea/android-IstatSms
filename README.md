@@ -81,7 +81,7 @@ multiple nested sms selection
 # Send Sms
 You can send sms using SmsSender class.
 ```java
- SmsSender sender = new SmsSender(this);
+ SmsSender sender = new SmsSender(mContext);
  sender.sendSms("40101383", "Hello world", new SmsSender.SendCallBack(){ 
      @Override
      public void onSuccessSending(Sms sms) {
@@ -104,6 +104,38 @@ You can send sms using SmsSender class.
      }
  });
 ```
+It is also possible to send massage with a delivery callBack to be notified when Sms has been delivered.
+```java
+sender.sendSms("40101383", "Hello world",mSendCallback,new SmsSender.DeliveryCallBack(){
+    @Override
+    public void onSuccessDelivery(Sms sms) {
+        //when success delivery
+    }
+
+    @Override
+    public void onFailDelivery(Sms sms) {
+    //when delivery fail
+    }
+}
+```
+You can also send Sms to multiple recipient in one step.
+```java
+List<String> recipients=new ArrayList(){
+    {
+        add("40101383");
+        add("59651580");
+        add("54020406")
+    }
+}
+// just send SMSs
+sender.sendSms(recipients, "Hello World");
+
+// just send SMSs with sendCallback
+sender.sendSms(recipients, "Hello World",mDeliveryCallback);
+
+// just send SMSs with send and Delivery Callback
+sender.sendSms(recipients, "Hello World", mSendCallback, mDeliveryCallback);
+```
 
 # Watch for incoming Sms
 Using the SmsWatcher, you can watch for incoming Sms
@@ -125,7 +157,7 @@ smsWatcher.startWatching(new SmsListener(){
 ```
 There is also possible to watch with some priority (your application can be the first to get the SMS, more priority is big, must you can be the first to get Sms received)
 ```java
-smsWatcher.startWatching(mSmsListener, 2147483647)//there, i listen with max priority
+smsWatcher.startWatching(mSmsListener, 2147483647)//there, i am listening with max priority
 ```
 After you have get your incoming Sms or you don't want to watch anymore (ex: the Activity->onDestroy())
 you have to stop watching.

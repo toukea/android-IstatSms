@@ -43,10 +43,6 @@ public final class SmsSender {
     private SendCallBack mSendCallBack;
     private BroadcastReceiver mSendReceiver, mDeliveryReceiver;
 
-    public static SmsSender getInstance(Context context) {
-        return new SmsSender(context);
-    }
-
     public SmsSender(Context context) {
         this.context = context;
     }
@@ -126,22 +122,22 @@ public final class SmsSender {
         return sendSms(phoneNumbers, body, null, null);
     }
 
-     SmsSender setDeliveryConfig(HandlerConfig deliveryConfig) {
+    SmsSender setDeliveryConfig(HandlerConfig deliveryConfig) {
         this.deliveryConfig = deliveryConfig;
         return this;
     }
 
-     SmsSender setDeliveryConfig(Intent intent, int requestCode, int flag) {
+    SmsSender setDeliveryConfig(Intent intent, int requestCode, int flag) {
         this.deliveryConfig = new HandlerConfig(intent, requestCode, flag);
         return this;
     }
 
-     SmsSender setSendConfig(HandlerConfig sendConfig) {
+    SmsSender setSendConfig(HandlerConfig sendConfig) {
         this.sendConfig = sendConfig;
         return this;
     }
 
-     SmsSender setSendConfig(Intent intent, int requestCode, int flag) {
+    SmsSender setSendConfig(Intent intent, int requestCode, int flag) {
         this.sendConfig = new HandlerConfig(intent, requestCode, flag);
         return this;
     }
