@@ -123,8 +123,8 @@ You can also send Sms to multiple recipient in one step.
 List<String> recipients=new ArrayList(){
     {
         add("40101383");
-        add("59651580");
-        add("54020406")
+        add("01111111");
+        add("02111111")
     }
 }
 // just send SMSs
