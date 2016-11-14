@@ -118,7 +118,7 @@ sender.sendSms("40101383", "Hello world",mSendCallback,new SmsSender.DeliveryCal
     }
 }
 ```
-You can also send Sms to multiple recipient in one step.
+You can also send Sms to multiple recipients in one step.
 ```java
 List<String> recipients=new ArrayList(){
     {
