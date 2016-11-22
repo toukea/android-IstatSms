@@ -7,7 +7,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import java.util.Date;
+
 import istat.android.telephony.sms.tools.SmsHandler;
+import istat.android.telephony.sms.tools.SmsWatcher;
 import istat.android.telephony.sms.tools.Util;
 
 /*
@@ -34,9 +37,10 @@ public final class Sms implements Parcelable {
             TYPE_MESSAGE_SENT = "2", TYPE_MESSAGE_DRAFT = "3",
             TYPE_MESSAGE_OUTBOX = "4", TYPE_MESSAGE_FAILED = "5",
             TYPE_MESSAGE_QUEUED = "6";
-    public String _id, thread_id, address, person, date, protocol, read,
+    public String _id, thread_id, address, person, protocol, read,
             status, type, reply_path_present, subject, body, service_center,
             locked;
+    public long date = -1;
 
     public Sms() {
 
@@ -46,7 +50,6 @@ public final class Sms implements Parcelable {
         this._id = id;
         this.address = address;
         this.body = body;
-        this.date = System.currentTimeMillis() + "";
     }
 
     public Sms(String address, String body) {
@@ -59,7 +62,7 @@ public final class Sms implements Parcelable {
         thread_id = in.readString();
         address = in.readString();
         person = in.readString();
-        date = in.readString();
+        date = in.readLong();
         protocol = in.readString();
         read = in.readString();
         status = in.readString();
@@ -111,9 +114,24 @@ public final class Sms implements Parcelable {
         this.body = body;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
+
+    /**
+     * use {@link #setDate(long)} or {@link #setDate(Date)}  instead.
+     *
+     * @param date
+     */
+    @Deprecated
+    public void setDate(String date) {
+        this.date = Long.valueOf(date);
+    }
+
+    public void setDate(Date date) {
+        this.date = date.getTime();
+    }
+
 
     public void setLocked(String locked) {
         this.locked = locked;
@@ -167,10 +185,7 @@ public final class Sms implements Parcelable {
         return body;
     }
 
-    public String getDate() {
-        if (TextUtils.isEmpty(date)) {
-            return System.currentTimeMillis() + "";
-        }
+    public long getDate() {
         return date;
     }
 
@@ -256,7 +271,7 @@ public final class Sms implements Parcelable {
         dest.writeString(thread_id);
         dest.writeString(address);
         dest.writeString(person);
-        dest.writeString(date);
+        dest.writeLong(date);
         dest.writeString(protocol);
         dest.writeString(read);
         dest.writeString(status);
@@ -266,5 +281,9 @@ public final class Sms implements Parcelable {
         dest.writeString(body);
         dest.writeString(service_center);
         dest.writeString(locked);
+    }
+
+    public SmsWatcher.SmsPart asPart() {
+        return new SmsWatcher.SmsPart(this.address, this.body);
     }
 }

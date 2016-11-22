@@ -16,27 +16,26 @@ import android.content.Context;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * 
  * @author Toukea Tatsi (Istat)
- *
  */
 public final class SmsQueryProvider {
 
-	public static final SmsSelection getSelectStatement(Context context){
-		return new SmsSelection(context);
-	}
-	public static final SmsDelete getDeleteStatement(Context context){
-		return new SmsDelete(context);
-	}
-	public static final SmsUpdate getUpdateStatement(Context context){
-		return new SmsUpdate(context);
-	}
-	public static final SmsUpdate getQueryStatement(Context context){
-		return new SmsUpdate(context);
-	}
-	public static final SmsInsert getInsertStatement(Context context){
-		return new SmsInsert(context);
-	}
-	
+    public static final SmsSelection getSelectStatement(Context context) {
+        return new SmsSelection(context);
+    }
+
+    public static final SmsDelete getDeleteStatement(Context context) {
+        return new SmsDelete(context);
+    }
+
+    public static final SmsUpdate getUpdateStatement(Context context) {
+        return new SmsUpdate(context);
+    }
+
+    public static final SmsInsert getInsertStatement(Context context) {
+        return new SmsInsert(context);
+    }
+
 }

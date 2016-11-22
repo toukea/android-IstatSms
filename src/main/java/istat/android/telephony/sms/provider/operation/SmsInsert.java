@@ -3,6 +3,8 @@ package istat.android.telephony.sms.provider.operation;
 import istat.android.telephony.sms.Sms;
 
 import android.content.Context;
+
+import java.util.Date;
 /*
  * Copyright (C) 2014 Istat Dev.
  *
@@ -66,7 +68,24 @@ public final class SmsInsert {
         return this;
     }
 
+    /**
+     * use {@link #setDate(long)} or {@link #setDate(Date)}  instead.
+     *
+     * @param date
+     * @return
+     */
+    @Deprecated
     public SmsInsert setDate(String date) {
+        sms.date = Long.valueOf(date);
+        return this;
+    }
+
+    public SmsInsert setDate(Date date) {
+        sms.date = date.getTime();
+        return this;
+    }
+
+    public SmsInsert setDate(long date) {
         sms.date = date;
         return this;
     }

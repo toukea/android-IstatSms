@@ -157,7 +157,7 @@ smsWatcher.startWatching(new SmsListener(){
 ```
 There is also possible to watch with some priority (your application can be the first to get the SMS, more priority is big, must you can be the first to get Sms received)
 ```java
-smsWatcher.startWatching(mSmsListener, 2147483647)//there, i am listening with max priority
+smsWatcher.startWatching(mSmsListener, SmsWatcher.MAX_PRIORITY)//there, i am listening with max priority
 ```
 After you have get your incoming Sms or you don't want to watch anymore (ex: the Activity->onDestroy())
 you have to stop watching.

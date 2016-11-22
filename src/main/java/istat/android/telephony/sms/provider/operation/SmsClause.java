@@ -30,6 +30,8 @@ abstract class SmsClause<T extends SmsClause<T>> {
     protected String whereClose = null;
     protected List<String> whereParams = new ArrayList<String>();
     protected String orderBy = null;
+    protected String groupBy = null;
+    protected String having = null;
     Context context;
 
     public SmsClause(Context context) {

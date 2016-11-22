@@ -67,7 +67,7 @@ final class SmsQuery {
         if (sms.getPerson() != null)
             values.put("person", sms.getPerson());
 
-        if (sms.getDate() != null)
+        if (sms.getDate() > 0)
             values.put("date", sms.getDate());
 
         if (sms.getProtocol() != null)
@@ -120,7 +120,7 @@ final class SmsQuery {
         if (sms.getPerson() != null)
             values.put("person", sms.getPerson());
 
-        if (sms.getDate() != null)
+        if (sms.getDate() > 0)
             values.put("date", sms.getDate());
 
         if (sms.getProtocol() != null)

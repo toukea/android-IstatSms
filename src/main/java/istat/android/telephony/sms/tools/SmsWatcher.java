@@ -8,7 +8,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
+import istat.android.telephony.sms.Sms;
+
 public final class SmsWatcher {
+    public final static int MAX_PRIORITY = 2147483647;
     public static String INTENT_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
     Context context;
 
@@ -59,20 +62,20 @@ public final class SmsWatcher {
         this.mListener = listener;
         IntentFilter filter = new IntentFilter(INTENT_SMS_RECEIVED);
         filter.setPriority(priority);
-        context.registerReceiver(mIncomeReceiver, filter);
+        context.registerReceiver(mIncomingReceiver, filter);
     }
 
     public void startWatching(SmsListener listener) {
         this.mListener = listener;
         IntentFilter filter = new IntentFilter(INTENT_SMS_RECEIVED);
-        context.registerReceiver(mIncomeReceiver, filter);
+        context.registerReceiver(mIncomingReceiver, filter);
     }
 
     public boolean stopWatching() {
         boolean out = mListener != null;
         try {
             if (out) {
-                context.unregisterReceiver(mIncomeReceiver);
+                context.unregisterReceiver(mIncomingReceiver);
                 mListener = null;
             }
         } catch (Exception e) {
@@ -85,7 +88,7 @@ public final class SmsWatcher {
         public void onReceiveSms(SmsPart sms, BroadcastReceiver receiver);
     }
 
-    private BroadcastReceiver mIncomeReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver mIncomingReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (mListener != null) {
@@ -97,10 +100,17 @@ public final class SmsWatcher {
 
     public static class SmsPart {
         public String address = "", body = "";
+        public long date = System.currentTimeMillis();
 
         public SmsPart(String address, String body) {
             this.address = address;
             this.body = body;
+        }
+
+        public Sms asSms() {
+            Sms sms = new Sms(address, body);
+            sms.date = date;
+            return sms;
         }
     }
 }
