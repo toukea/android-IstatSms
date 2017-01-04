@@ -1,5 +1,5 @@
 # IstatSms
-An Android Library than make Sms manipulation easy
+An Android Library which make Sms manipulation easy
 -Send SMS, Receive SMS and Query them from SmSProvider using and easy sms query builder
 
 
