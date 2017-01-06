@@ -1,9 +1,4 @@
-package istat.android.telephony.sms.provider.operation;
-
-
-import istat.android.telephony.sms.Sms;
-
-import java.util.List;
+package istat.android.telephony.sms.provider.operations;
 
 import android.content.Context;
 /*
@@ -25,17 +20,22 @@ import android.content.Context;
 /**
  * @author Toukea Tatsi (Istat)
  */
-public final class SmsSelection extends SmsClause<SmsSelection> {
+public final class SmsQueryProvider {
 
-    SmsSelection(Context context) {
-        super(context);
+    public static final SmsSelection getSelectStatement(Context context) {
+        return new SmsSelection(context);
     }
 
-    public List<Sms> execute() {
-        return SmsQuery.select(context, this);
+    public static final SmsDelete getDeleteStatement(Context context) {
+        return new SmsDelete(context);
     }
 
-    public int count() {
-        return SmsQuery.count(context, this);
+    public static final SmsUpdate getUpdateStatement(Context context) {
+        return new SmsUpdate(context);
     }
+
+    public static final SmsInsert getInsertStatement(Context context) {
+        return new SmsInsert(context);
+    }
+
 }

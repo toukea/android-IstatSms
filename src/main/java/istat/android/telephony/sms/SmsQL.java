@@ -1,10 +1,10 @@
 package istat.android.telephony.sms;
 
-import istat.android.telephony.sms.provider.operation.SmsDelete;
-import istat.android.telephony.sms.provider.operation.SmsInsert;
-import istat.android.telephony.sms.provider.operation.SmsQueryProvider;
-import istat.android.telephony.sms.provider.operation.SmsSelection;
-import istat.android.telephony.sms.provider.operation.SmsUpdate;
+import istat.android.telephony.sms.provider.operations.SmsDelete;
+import istat.android.telephony.sms.provider.operations.SmsInsert;
+import istat.android.telephony.sms.provider.operations.SmsQueryProvider;
+import istat.android.telephony.sms.provider.operations.SmsSelection;
+import istat.android.telephony.sms.provider.operations.SmsUpdate;
 
 import android.content.Context;
 

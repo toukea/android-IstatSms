@@ -1,5 +1,5 @@
 # IstatSms
-An Android Library than make Sms manipulation easy
+An Android Library which make Sms manipulation easy
 -Send SMS, Receive SMS and Query them from SmSProvider using and easy sms query builder
 
 
@@ -118,13 +118,13 @@ sender.sendSms("40101383", "Hello world",mSendCallback,new SmsSender.DeliveryCal
     }
 }
 ```
-You can also send Sms to multiple recipient in one step.
+You can also send Sms to multiple recipients in one step.
 ```java
 List<String> recipients=new ArrayList(){
     {
         add("40101383");
-        add("59651580");
-        add("54020406")
+        add("01111111");
+        add("02111111")
     }
 }
 // just send SMSs
@@ -150,7 +150,7 @@ smsWatcher.startWatching(new SmsListener(){
         
         You have also the broadcastReceiver used to receive Sms. (Do what you want with ...)
         you can for exemple abort them
-        if you don't want auther application to get this sms
+        if you don't want other application to be notified by this incoming sms
         */
     }
 })
@@ -159,7 +159,7 @@ There is also possible to watch with some priority (your application can be the 
 ```java
 smsWatcher.startWatching(mSmsListener, SmsWatcher.MAX_PRIORITY)//there, i am listening with max priority
 ```
-After you have get your incoming Sms or you don't want to watch anymore (ex: the Activity->onDestroy())
+After you have get your incoming Sms or if you don't want to watch anymore (ex: the Activity->onDestroy())
 you have to stop watching.
 ```java
 smsWatcher.stopWatching();
