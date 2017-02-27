@@ -6,13 +6,13 @@ ext {
 }
 apply from: 'release-jar.gradle'
 android {
-    compileSdkVersion 18
+    compileSdkVersion 24
     buildToolsVersion "24.0.2"
     lintOptions {
         abortOnError false
     }
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 24
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
