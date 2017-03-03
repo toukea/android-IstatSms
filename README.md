@@ -176,7 +176,7 @@ Just add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-   compile 'istat.android.telephony.sms:istat-sms:1.2.0'
+   compile 'istat.android.telephony.sms:istat-sms:1.2.1'
 }
 ```
 
@@ -192,7 +192,7 @@ add the dependency to your pom.xml:
 <dependency>
   <groupId>istat.android.telephony.sms</groupId>
   <artifactId>istat-sms</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <type>pom</type>
 </dependency>
 ```

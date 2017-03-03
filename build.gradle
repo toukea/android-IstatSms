@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 ext {
     PUBLISH_GROUP_ID = 'istat.android.telephony.sms'
     PUBLISH_ARTIFACT_ID = 'istat-sms'
-    PUBLISH_VERSION = '1.2.0'
+    PUBLISH_VERSION = '1.2.1'
 }
 apply from: 'release-jar.gradle'
 android {
