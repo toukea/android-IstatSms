@@ -19,6 +19,11 @@ do a Selection on SmsProvider data base
         .or....
         .andBodyLike("hello")
         .execute();
+
+        //for each i am displaying sender and body (Log-cat)
+        for(Sms sms:selectedSms){
+            Log.i(sms.address, sms.body);
+        }
  ``` 
 
 do an insertion on SmsProvider data base

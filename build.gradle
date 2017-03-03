@@ -4,12 +4,13 @@ ext {
     PUBLISH_ARTIFACT_ID = 'istat-sms'
     PUBLISH_VERSION = '1.2.0'
 }
-//apply from: 'release-aar.gradle'
 apply from: 'release-jar.gradle'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
-
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 24
