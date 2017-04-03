@@ -1,4 +1,4 @@
-package istat.android.telephony.sms.provider.operations;
+package istat.android.telephony.sms.operations;
 
 import istat.android.telephony.sms.Sms;
 
