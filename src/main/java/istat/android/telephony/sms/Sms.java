@@ -5,11 +5,9 @@ import org.json.JSONObject;
 import android.app.PendingIntent;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.TextUtils;
 
 import java.util.Date;
 
-import istat.android.telephony.sms.tools.SmsHandler;
 import istat.android.telephony.sms.tools.SmsWatcher;
 import istat.android.telephony.sms.tools.Util;
 
@@ -93,10 +91,6 @@ public final class Sms implements Parcelable {
 
     public void send(PendingIntent sendPIntent, PendingIntent receivIntent) {
         Util.sendSMS(address, body, sendPIntent, receivIntent);
-    }
-
-    public void send(SmsHandler config) {
-        config.sendSms(address, body);
     }
 
     // ------------------------------------------------------------

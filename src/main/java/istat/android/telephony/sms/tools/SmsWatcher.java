@@ -99,7 +99,7 @@ public final class SmsWatcher {
     private SmsListener mListener;
 
     public static class SmsPart {
-        public String address = "", body = "";
+        public final String address, body;
         public long date = System.currentTimeMillis();
 
         public SmsPart(String address, String body) {
