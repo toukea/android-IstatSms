@@ -100,7 +100,7 @@ public final class SmsWatcher {
 
     public static class SmsPart {
         public final String address, body;
-        public long date = System.currentTimeMillis();
+        public final long date = System.currentTimeMillis();
 
         public SmsPart(String address, String body) {
             this.address = address;
