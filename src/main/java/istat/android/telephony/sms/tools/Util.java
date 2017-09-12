@@ -7,8 +7,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.SmsManager;
+import android.text.TextUtils;
 
 public final class Util {
+    private Util() {
+
+    }
+
     public static String convertTolocalPhoneNumber(String phone) {
         return phone.replaceFirst("^(00\\d{3})", "").replaceFirst(
                 "^(\\+\\d{3})", "");
@@ -88,5 +93,37 @@ public final class Util {
                     deliveryIntents);
             return parts.size();
         }
+    }
+
+    public final static void startSmsIntent(Context context, String smBody, String... number) {
+        String finalNumber = number[0];
+        for (String num : number) {
+            if (!TextUtils.isEmpty(num)) {
+                finalNumber += ";" + num;
+            }
+        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) // At least KitKat
+//        {
+//            String defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(context); // Need to change the build to API 19
+//
+//            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+//            sendIntent.setType("text/plain");
+//            sendIntent.putExtra(Intent.EXTRA_TEXT, smBody);
+//
+//            if (defaultSmsPackageName != null)// Can be null in case that there is no default, then the user would be able to choose
+//            // any app that support this intent.
+//            {
+//                sendIntent.setPackage(defaultSmsPackageName);
+//            }
+//            context.startActivity(sendIntent);
+//
+//        } else // For early versions, do what worked for you before.
+//        {
+        Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
+        smsIntent.setType("vnd.android-dir/mms-sms");
+        smsIntent.putExtra("address", finalNumber);
+        smsIntent.putExtra("sms_body", smBody);
+        context.startActivity(smsIntent);
+//        }
     }
 }
