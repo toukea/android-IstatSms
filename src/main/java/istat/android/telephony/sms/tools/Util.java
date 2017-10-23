@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.SmsManager;
+import android.telephony.SmsMessage;
 import android.text.TextUtils;
 
 public final class Util {
@@ -45,11 +46,18 @@ public final class Util {
     public static int sendSMS(String address, String body,
                               PendingIntent sendPIntent, PendingIntent receiveIntent) {
         SmsManager sms = SmsManager.getDefault();
-        if (body.length() <= 160) {
+        if (body == null) {
+            throw new IllegalArgumentException("Sms body can't be null.");
+        }
+        if (TextUtils.isEmpty(address)) {
+            throw new IllegalArgumentException("Sms address can't be null or empty.");
+        }
+        final ArrayList<String> parts = sms.divideMessage(body);
+        if (parts.size() <= 1) {
             sms.sendTextMessage(address, null, body, sendPIntent, receiveIntent);
             return 1;
         } else {
-            ArrayList<String> parts = sms.divideMessage(body);
+
             ArrayList<PendingIntent> sendIntents = new ArrayList<PendingIntent>();
             ArrayList<PendingIntent> deliveryIntents = new ArrayList<PendingIntent>();
             for (int i = 0; i <= parts.size(); i++) {
