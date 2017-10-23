@@ -57,18 +57,6 @@ public final class SmsUpdate extends SmsClause<SmsUpdate> {
         return this;
     }
 
-    /**
-     * use {@link #setDate(long)} or {@link #setDate(Date)}  instead.
-     *
-     * @param date
-     * @return
-     */
-    @Deprecated
-    public SmsUpdate setDate(String date) {
-        sms.date = Long.valueOf(date);
-        return this;
-    }
-
     public SmsUpdate setDate(Date date) {
         sms.date = date.getTime();
         return this;

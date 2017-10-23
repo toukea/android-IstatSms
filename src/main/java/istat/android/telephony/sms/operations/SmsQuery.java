@@ -47,12 +47,12 @@ final class SmsQuery {
             "body",
             "service_center",
             "locked"};
-    static Uri uriSms = Uri.parse("content://sms");
+    final static Uri uriSms = Uri.parse("content://sms");
 
     public SmsQuery() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            uriSms = Telephony.Sms.Sent.CONTENT_URI;
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            uriSms = Telephony.Sms.Sent.CONTENT_URI;
+//        }
     }
 
     public static int insert(Context context, Sms sms) {
@@ -185,8 +185,12 @@ final class SmsQuery {
             sms.setThread_id(c.getString(1));
             sms.setAddress(c.getString(2));
             sms.setPerson(c.getString(3));
-            sms.setDate(c.getString(4));
 
+            try {
+                sms.setDate(Long.valueOf(c.getString(4)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             sms.setProtocol(c.getString(5));
             sms.setRead(c.getString(6));
             sms.setStatus(c.getString(7));

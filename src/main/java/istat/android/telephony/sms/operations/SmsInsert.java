@@ -38,17 +38,6 @@ public final class SmsInsert {
         return this;
     }
 
-    /**
-     * please, use {@link #setAs(Sms) instead.}
-     *
-     * @param smsLike
-     * @return
-     */
-    @Deprecated
-    public SmsInsert setSms(Sms smsLike) {
-        return setAs(smsLike);
-    }
-
     public int execute() {
         return SmsQuery.insert(context, sms);
     }
@@ -65,18 +54,6 @@ public final class SmsInsert {
 
     public SmsInsert setBody(String body) {
         sms.body = body;
-        return this;
-    }
-
-    /**
-     * use {@link #setDate(long)} or {@link #setDate(Date)}  instead.
-     *
-     * @param date
-     * @return
-     */
-    @Deprecated
-    public SmsInsert setDate(String date) {
-        sms.date = Long.valueOf(date);
         return this;
     }
 

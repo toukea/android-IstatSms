@@ -112,16 +112,6 @@ public final class Sms implements Parcelable {
         this.date = date;
     }
 
-    /**
-     * use {@link #setDate(long)} or {@link #setDate(Date)}  instead.
-     *
-     * @param date
-     */
-    @Deprecated
-    public void setDate(String date) {
-        this.date = Long.valueOf(date);
-    }
-
     public void setDate(Date date) {
         this.date = date.getTime();
     }
