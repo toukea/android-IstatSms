@@ -10,8 +10,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
-import android.provider.Telephony;
 /*
  * Copyright (C) 2014 Istat Dev.
  *
@@ -185,12 +183,7 @@ final class SmsQuery {
             sms.setThread_id(c.getString(1));
             sms.setAddress(c.getString(2));
             sms.setPerson(c.getString(3));
-
-            try {
-                sms.setDate(Long.valueOf(c.getString(4)));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            sms.setDate(c.getLong(4));
             sms.setProtocol(c.getString(5));
             sms.setRead(c.getString(6));
             sms.setStatus(c.getString(7));
