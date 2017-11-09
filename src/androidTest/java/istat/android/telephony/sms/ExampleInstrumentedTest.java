@@ -7,7 +7,11 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 import istat.android.telephony.sms.operations.SmsSelection;
+
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -26,5 +30,14 @@ public class ExampleInstrumentedTest {
         SmsSelection selection3 = sql.selectSms().whereBodyLike("world");
         int count = sql.updateSms().setBody("Hello World").WHERE(selection1).AND(selection2).OR(selection3).execute();
 
+    }
+
+    @Test
+    public void simpleSelect() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        SmsQL sql = new SmsQL(appContext);
+        List<Sms> sms = sql.selectSms().execute();
+        assertTrue(!sms.isEmpty());
     }
 }

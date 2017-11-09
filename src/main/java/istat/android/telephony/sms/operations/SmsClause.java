@@ -38,6 +38,19 @@ abstract class SmsClause<T extends SmsClause<T>> {
         this.context = context;
     }
 
+    public T fromInbox() {
+        return (T) this;
+    }
+
+    public T fromSent() {
+        return (T) this;
+    }
+
+    public T fromDraft() {
+        return (T) this;
+    }
+
+
     @SuppressWarnings("unchecked")
     public T whereLockedEqual(String value) {
         if (whereClose == null)
