@@ -79,14 +79,14 @@ public final class SmsSender {
         this.tmpSMS = new Sms(address, body);
         int out = Util.optSmsBodyPartNumber(body);
         if (getSendIntent() != null) {
-            IntentFilter flt = new IntentFilter(getSendIntent().getAction());
-            context.registerReceiver(createSendReceiver(this.tmpSMS, out), flt);
+            IntentFilter filter = new IntentFilter(getSendIntent().getAction());
+            context.registerReceiver(createSendReceiver(this.tmpSMS), filter);
         }
 
         if (getDeliveryIntent() != null) {
-            IntentFilter flt = new IntentFilter(getDeliveryIntent().getAction());
-            context.registerReceiver(createDeliveryReceiver(this.tmpSMS, out),
-                    flt);
+            IntentFilter filter = new IntentFilter(getDeliveryIntent().getAction());
+            context.registerReceiver(createDeliveryReceiver(this.tmpSMS),
+                    filter);
         }
         Util.sendSMS(
                 address,
@@ -172,10 +172,8 @@ public final class SmsSender {
         }
     }
 
-    private BroadcastReceiver createSendReceiver(final Sms sms,
-                                                 final int smsCount) {
+    private BroadcastReceiver createSendReceiver(final Sms sms) {
         return mSendReceiver = new BroadcastReceiver() {
-            int successCount = 0;
 
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -183,11 +181,8 @@ public final class SmsSender {
                     case Activity.RESULT_OK:
                         // [� send success actions � ];
                         if (mSendCallBack != null) {
-                            successCount++;
-                            if (successCount >= smsCount) {
-                                mSendCallBack.onSuccessSending(tmpSMS);
-                                unregisterSendWatcher();
-                            }
+                            mSendCallBack.onSuccessSending(tmpSMS);
+                            unregisterSendWatcher();
                         }
                         break;
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
@@ -216,8 +211,7 @@ public final class SmsSender {
         };
     }
 
-    private BroadcastReceiver createDeliveryReceiver(final Sms sms,
-                                                     final int smsCount) {
+    private BroadcastReceiver createDeliveryReceiver(final Sms sms) {
         return mDeliveryReceiver = new BroadcastReceiver() {
 
             @Override
@@ -226,12 +220,14 @@ public final class SmsSender {
                 switch (getResultCode()) {
                     case Activity.RESULT_OK:
                         // [� send success actions � ];
-                        if (mDeliveryCallBack != null)
+                        if (mDeliveryCallBack != null) {
                             mDeliveryCallBack.onSuccessDelivery(tmpSMS);
+                        }
                         break;
                     default:
-                        if (mDeliveryCallBack != null)
+                        if (mDeliveryCallBack != null) {
                             mDeliveryCallBack.onFailDelivery(tmpSMS);
+                        }
                         break;
 
                 }
@@ -298,19 +294,19 @@ public final class SmsSender {
     // return mIncomeReceiver;
     // }
     public interface SendCallBack {
-        public void onSuccessSending(Sms sms);
+        void onSuccessSending(Sms sms);
 
-        public void onGenericFail(Sms sms);
+        void onGenericFail(Sms sms);
 
-        public void onRadioOffFail(Sms sms);
+        void onRadioOffFail(Sms sms);
 
-        public void onBadFormedSmsFail(Sms sms);
+        void onBadFormedSmsFail(Sms sms);
     }
 
     public interface DeliveryCallBack {
-        public void onSuccessDelivery(Sms sms);
+        void onSuccessDelivery(Sms sms);
 
-        public void onFailDelivery(Sms sms);
+        void onFailDelivery(Sms sms);
     }
 
     public static class HandlerConfig {
