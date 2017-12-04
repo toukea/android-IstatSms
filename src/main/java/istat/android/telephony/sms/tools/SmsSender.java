@@ -154,8 +154,10 @@ public final class SmsSender {
 
     private void unregisterSendWatcher() {
         try {
-            if (mSendCallBack != null)
+            if (mSendCallBack != null) {
                 context.unregisterReceiver(mSendReceiver);
+            }
+            sendConfig = null;
             mSendCallBack = null;
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,8 +166,10 @@ public final class SmsSender {
 
     private void unregisterDeliveryWatcher() {
         try {
-            if (mDeliveryCallBack != null)
+            if (mDeliveryCallBack != null) {
                 context.unregisterReceiver(mDeliveryReceiver);
+            }
+            deliveryConfig = null;
             mDeliveryCallBack = null;
         } catch (Exception e) {
             e.printStackTrace();
