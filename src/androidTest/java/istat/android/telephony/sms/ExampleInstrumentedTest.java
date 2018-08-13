@@ -7,10 +7,13 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import istat.android.telephony.sms.operations.SmsSelection;
 
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -39,5 +42,13 @@ public class ExampleInstrumentedTest {
         SmsQL sql = new SmsQL(appContext);
         List<Sms> sms = sql.selectSms().execute();
         assertTrue(!sms.isEmpty());
+    }
+
+    @Test
+    public void smsContentStream() throws Exception {
+        // Context of the app under test.
+        String uri = "content://sms";
+        InputStream stream = new URL(uri).openStream();
+        assertNotNull(stream);
     }
 }
