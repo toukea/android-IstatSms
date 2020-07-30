@@ -1,11 +1,11 @@
 package istat.android.telephony.sms.operations;
 
-import istat.android.telephony.sms.Sms;
+import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
+import istat.android.telephony.sms.Sms;
 
 /*
  * Copyright (C) 2014 Istat Dev.
@@ -550,7 +550,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
 
     public T orThreadIdEqual(String value) {
         if (whereClose == null)
-            whereClose += "thread_id= ?";
+            whereClose = "thread_id= ?";
         else
             whereClose += " OR thread_id= ?";
         whereParams.add(value);
@@ -560,7 +560,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
     @SuppressWarnings("unchecked")
     public T orIdEqual(String value) {
         if (whereClose == null)
-            whereClose += " _id= ?";
+            whereClose = " _id= ?";
         else
             whereClose += " OR _id= ?";
         whereParams.add(value);

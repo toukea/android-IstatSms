@@ -2,7 +2,7 @@ package istat.android.telephony.sms;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void nestedQuery() throws Exception {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         SmsQL sql = new SmsQL(appContext);
         SmsSelection selection1 = sql.selectSms().whereAddressEqual("40101383");
         SmsSelection selection2 = sql.selectSms().whereBodyLike("hello");
@@ -38,7 +38,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void simpleSelect() throws Exception {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         SmsQL sql = new SmsQL(appContext);
         List<Sms> sms = sql.selectSms().execute();
         assertTrue(!sms.isEmpty());
