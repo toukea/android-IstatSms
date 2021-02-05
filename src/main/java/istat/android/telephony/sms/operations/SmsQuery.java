@@ -94,8 +94,7 @@ final class SmsQuery {
 
         if (sms.getLocked() != null)
             values.put("locked", sms.getLocked());
-        context.getContentResolver().insert(uriSms, values);
-        return out;
+        return context.getContentResolver().insert(uriSms, values) != null ? 1 : 0;
     }
 
     /**
@@ -108,7 +107,7 @@ final class SmsQuery {
      */
     public static int update(Context context, Sms sms, SmsClause<?> query) {
         if (sms == null) return 0;// delete(context, query);
-        int out = 0;
+        int out;
         ContentValues values = new ContentValues();
         if (sms.getThread_id() != null)
             values.put("thread_id", sms.getThread_id());
@@ -147,7 +146,7 @@ final class SmsQuery {
 
         if (sms.getLocked() != null)
             values.put("locked", sms.getLocked());
-        context.getContentResolver().update(uriSms, values,
+        out = context.getContentResolver().update(uriSms, values,
                 query.getWhereClose(),
                 query.getWhereParams());
         return out;
