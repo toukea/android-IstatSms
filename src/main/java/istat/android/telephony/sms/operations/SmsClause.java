@@ -233,7 +233,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
 
     public T whereThreadIdEqual(String value) {
         if (whereClose == null)
-            whereClose += "thread_id= ?";
+            whereClose = "thread_id= ?";
         else
             whereClose += " AND thread_id= ?";
         whereParams.add(value);
@@ -242,7 +242,7 @@ abstract class SmsClause<T extends SmsClause<T>> {
 
     public T whereIdEqual(String value) {
         if (whereClose == null)
-            whereClose += " _id= ?";
+            whereClose = "_id= ?";
         else
             whereClose += " AND _id= ?";
         whereParams.add(value);
