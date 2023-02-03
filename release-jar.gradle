@@ -1,5 +1,5 @@
 // ./gradlew clean build generateRelease
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 def groupId = project.PUBLISH_GROUP_ID
 def artifactId = project.PUBLISH_ARTIFACT_ID
@@ -33,16 +33,16 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        pom.groupId = groupId
-        pom.artifactId = artifactId
-        pom.version = version
-
-        // Add other pom properties here if you want (developer details / licenses)
-        repository(url: "file://${localReleaseDest}")
-    }
-}
+//uploadArchives {
+//    repositories.mavenDeployer {
+//        pom.groupId = groupId
+//        pom.artifactId = artifactId
+//        pom.version = version
+//
+//        // Add other pom properties here if you want (developer details / licenses)
+//        repository(url: "file://${localReleaseDest}")
+//    }
+//}
 
 task zipRelease(type: Zip) {
     from localReleaseDest
@@ -55,7 +55,7 @@ task generateRelease doLast {
     println "Release ${version} zipped can be found ${buildDir}/release-${version}.zip"
 }
 
-generateRelease.dependsOn(uploadArchives)
+//generateRelease.dependsOn(uploadArchives)
 generateRelease.dependsOn(zipRelease)
 
 
