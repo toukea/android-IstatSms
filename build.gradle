@@ -6,6 +6,7 @@ ext {
 }
 apply from: 'release-jar.gradle'
 android {
+    namespace 'istat.android.telephony'
     compileSdkVersion 32
     defaultConfig {
         minSdkVersion 19
